@@ -3,13 +3,15 @@ import React from 'react';
 
 import {StatusBar, StyleSheet} from 'react-native';
 import RootNavigation from './src/navigation/RootNavigation';
+import {AuthProvider} from './src/context/AuthContext';
 
 function App(): React.JSX.Element {
   return (
-    <NavigationContainer>
-      <StatusBar hidden={true} />
-      <RootNavigation />
-    </NavigationContainer>
+    <AuthProvider>
+      <NavigationContainer>
+        <RootNavigation />
+      </NavigationContainer>
+    </AuthProvider>
   );
 }
 
