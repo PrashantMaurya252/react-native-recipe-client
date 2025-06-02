@@ -1,24 +1,39 @@
-import {Button, Text, View} from 'react-native';
+import {
+  Button,
+  Platform,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import {RootStackParamList} from '../navigation/RootNavigation';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-
 type LoginScreenNavigationProp = NativeStackNavigationProp<
-    RootStackParamList,
-    'Login'
-  >;
+  RootStackParamList,
+  'Login'
+>;
 
-  interface LoginScreenProps{
-    navigation : LoginScreenNavigationProp
-  }
+interface LoginScreenProps {
+  navigation: LoginScreenNavigationProp;
+}
 const LoginScreen: React.FC<LoginScreenProps> = ({navigation}) => {
-  
   return (
-    <View>
+    <SafeAreaView style={styles.container}>
       <Text>Login Screen</Text>
-      <Button title='Go to Sign Up' onPress={()=>navigation.navigate('Signup')}/>
-    </View>
+      <Button
+        title="Go to Sign Screen"
+        onPress={() => navigation.navigate('Signup')}
+      />
+    </SafeAreaView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    // paddingTop:Platform.OS === 'android' ?
+  },
+});
 
 export default LoginScreen;
