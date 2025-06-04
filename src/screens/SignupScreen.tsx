@@ -1,5 +1,6 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {
+  Alert,
   StatusBar,
   StyleSheet,
   Text,
@@ -8,7 +9,8 @@ import {
   View,
 } from 'react-native';
 import {RootStackParamList} from '../navigation/RootNavigation';
-import {useState} from 'react';
+import {useContext, useState} from 'react';
+import {AuthContext} from '../context/AuthContext';
 
 type SignUpScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -21,8 +23,21 @@ interface SignUpScreenProps {
 const SignupScreen: React.FC<SignUpScreenProps> = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const {signUp} = useContext(AuthContext);
 
-  const handleSignUp = async () => {};
+  const handleSignUp = async () => {
+    console.log(email, password);
+    if (email && password) {
+      const success = await signUp(email, password);
+      if (success) {
+        // do something
+      } else {
+        Alert.alert('');
+      }
+    } else {
+      Alert.alert('Invalid Input', 'Please enter both email and password');
+    }
+  };
   return (
     <View style={styles.container}>
       <Text style={styles.headerText}>Sign Up</Text>

@@ -18,26 +18,26 @@ const RootNavigation: React.FC = () => {
   return (
     <Stack.Navigator
       initialRouteName="Login"
-      screenOptions={{headerShown: false}}>
+      screenOptions={{headerShown: true}}>
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        // options={{headerShown: false}}
+        options={{headerShown: true}}
       />
       <Stack.Screen
         name="Signup"
         component={SignupScreen}
-        // options={{headerShown: false}}
+        options={{headerShown: true}}
       />
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        // options={{headerShown: false}}
+        options={{headerShown: true}}
       />
       <Stack.Screen
         name="RecipeDetails"
         component={RecipeDetailsScreen}
-        // options={{headerShown: false}}
+        options={{headerShown: true}}
       />
     </Stack.Navigator>
   );
