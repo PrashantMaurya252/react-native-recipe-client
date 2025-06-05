@@ -18,16 +18,17 @@ const RootNavigation: React.FC = () => {
   return (
     <Stack.Navigator
       initialRouteName="Login"
-      screenOptions={{headerShown: true}}>
+      // screenOptions={{headerShown: true}}
+    >
       <Stack.Screen
         name="Login"
         component={LoginScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="Signup"
         component={SignupScreen}
-        options={{headerShown: true}}
+        options={{headerShown: false}}
       />
       <Stack.Screen
         name="Home"
