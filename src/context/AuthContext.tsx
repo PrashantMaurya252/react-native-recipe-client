@@ -1,3 +1,4 @@
+import axios from 'axios';
 import {createContext, ReactNode, useState} from 'react';
 
 const API_URL = 'http://10.0.2.2:5000';
@@ -21,6 +22,22 @@ export const AuthProvider: React.FC<{children: ReactNode}> = ({children}) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const signUp = async (email: string, password: string): Promise<boolean> => {
+    console.log(email, password);
+    try {
+      const result = await axios.post(`${API_URL}/api/auth/register`, {
+        email,
+        password,
+      });
+      console.log(result, 'result');
+      if (result?.data?.success) return true;
+      else return false;
+    } catch (error) {
+      console.log(error);
+      if (axios.isAxiosError(error)) {
+        console.error('Error Details', error.response?.data);
+      }
+      return false;
+    }
     return true;
   };
   const signIn = async (email: string, password: string): Promise<boolean> => {
