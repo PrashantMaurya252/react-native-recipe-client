@@ -1,7 +1,8 @@
-import {useContext} from 'react';
+import {useContext, useState} from 'react';
 import {
   Alert,
   Button,
+  Modal,
   StyleSheet,
   Text,
   TextInput,
@@ -11,6 +12,7 @@ import {
 import {AuthContext} from '../context/AuthContext';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../navigation/RootNavigation';
+import CreateRecipeForm from '../components/CreateRecipeForm';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -22,6 +24,8 @@ interface HomeScreenProps {
 }
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const {userId, token, signOut} = useContext(AuthContext);
+  const [showModal, setShowModal] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   console.log(userId, token);
 
   const handleLogout = async () => {
@@ -46,14 +50,27 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         <TextInput
           style={styles.searchInput}
           placeholder="Search Recipes ..."
+          value={searchQuery}
+          onChangeText={setSearchQuery}
         />
-        <TouchableOpacity style={styles.iconBtn}>
+        <TouchableOpacity
+          style={styles.iconBtn}
+          onPress={() => setShowModal(true)}>
           <Text style={styles.iconBtnText}>+</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
           <Text style={styles.logoutButtonText}>Logout</Text>
         </TouchableOpacity>
       </View>
+      {/* render all the recipies */}
+
+      {/* Modal for creating new recipe */}
+      <Modal
+        visible={showModal}
+        animationType="slide"
+        onRequestClose={() => setShowModal(false)}>
+        <CreateRecipeForm />
+      </Modal>
     </View>
   );
 };
