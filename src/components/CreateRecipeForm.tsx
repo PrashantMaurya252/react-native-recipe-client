@@ -13,10 +13,13 @@ const CreateRecipeForm: React.FC = () => {
     <View style={styles.container}>
       <Text style={styles.title}>Create New Recipe</Text>
       <TextInput style={styles.input} placeholder="Recipe Title" />
-      <TextInput style={styles.input} placeholder="Recipe Description" />
+      <TextInput
+        style={[styles.input, styles.textArea]}
+        placeholder="Recipe Description"
+      />
       <View style={styles.pickerContainer}>
         <Text style={styles.label}>Difficulty</Text>
-        <Picker>
+        <Picker style={styles.picker}>
           <Picker.Item label="Easy" value={'Easy'} />
           <Picker.Item label="Medium" value={'Medium'} />
           <Picker.Item label="Hard" value={'Hard'} />
@@ -54,13 +57,45 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 10,
   },
-  label: {},
-  pickerContainer: {},
-  buttonContainer: {},
-  button: {},
-  cancelButton: {},
-  submitButton: {},
-  buttonText: {},
+  textArea: {
+    height: 100,
+    textAlignVertical: 'top',
+  },
+  label: {
+    fontSize: 16,
+    marginRight: 8,
+  },
+  pickerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  picker: {
+    flex: 1,
+    height: 50,
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  button: {
+    flex: 1,
+    padding: 16,
+    borderRadius: 4,
+    alignItems: 'center',
+  },
+  cancelButton: {
+    backgroundColor: '#ccc',
+    marginRight: 8,
+  },
+  submitButton: {
+    backgroundColor: '#007aff',
+  },
+  buttonText: {
+    color: '#ffffff',
+    fontWeight: 'bold',
+    fontSize: 16,
+  },
 });
 
 export default CreateRecipeForm;
