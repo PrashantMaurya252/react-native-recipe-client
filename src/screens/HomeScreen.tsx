@@ -69,7 +69,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         visible={showModal}
         animationType="slide"
         onRequestClose={() => setShowModal(false)}>
-        <CreateRecipeForm />
+        <CreateRecipeForm onCancel={() => setShowModal(false)} />
       </Modal>
     </View>
   );

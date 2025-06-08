@@ -8,7 +8,11 @@ import {
   View,
 } from 'react-native';
 
-const CreateRecipeForm: React.FC = () => {
+interface CreateRecipeFormProps {
+  onCancel: () => void;
+}
+
+const CreateRecipeForm: React.FC<CreateRecipeFormProps> = ({onCancel}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create New Recipe</Text>
@@ -27,7 +31,9 @@ const CreateRecipeForm: React.FC = () => {
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={[styles.button, styles.cancelButton]}>
-          <Text style={styles.buttonText}>Cancel</Text>
+          <Text style={styles.buttonText} onPress={onCancel}>
+            Cancel
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.button, styles.submitButton]}>
           <Text style={styles.buttonText}>Create Recipe</Text>
