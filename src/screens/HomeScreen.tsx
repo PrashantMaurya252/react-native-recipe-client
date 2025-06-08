@@ -13,6 +13,7 @@ import {AuthContext} from '../context/AuthContext';
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../navigation/RootNavigation';
 import CreateRecipeForm from '../components/CreateRecipeForm';
+import {Recipe, RecipeContext} from '../context/RecipeContext';
 
 type HomeScreenNavigationProp = NativeStackNavigationProp<
   RootStackParamList,
@@ -24,6 +25,7 @@ interface HomeScreenProps {
 }
 const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
   const {userId, token, signOut} = useContext(AuthContext);
+  const {createRecipe} = useContext(RecipeContext);
   const [showModal, setShowModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   console.log(userId, token);
@@ -43,6 +45,12 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         },
       },
     ]);
+  };
+
+  const handleOnCreateRecipe = async (
+    newRecipe: Omit<Recipe, '_id' | 'createdBy' | 'createdAt'>,
+  ) => {
+    createRecipe(newRecipe);
   };
   return (
     <View style={styles.container}>
@@ -69,7 +77,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({navigation}) => {
         visible={showModal}
         animationType="slide"
         onRequestClose={() => setShowModal(false)}>
-        <CreateRecipeForm onCancel={() => setShowModal(false)} />
+        <CreateRecipeForm
+          onSubmit={handleOnCreateRecipe}
+          onCancel={() => setShowModal(false)}
+        />
       </Modal>
     </View>
   );

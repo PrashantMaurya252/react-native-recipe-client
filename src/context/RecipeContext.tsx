@@ -23,7 +23,11 @@ export const RecipeContext = createContext<RecipeContextData>(
 export const RecipeProvider: React.FC<{children: ReactNode}> = ({children}) => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
 
-  const createRecipe = async () => {};
+  const createRecipe = async (
+    receipe: Omit<Recipe, '_id' | 'createdBy' | 'createdAt'>,
+  ) => {
+    console.log(receipe, 'recipe from context');
+  };
   return (
     <RecipeContext.Provider value={{createRecipe, recipes}}>
       {children}
